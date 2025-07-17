@@ -23,7 +23,6 @@ const PersonalFormPage = () => {
     setLoading,
     setError,
     setResult,
-    loading,
     error,
     result,
   } = usePersonalQueryStore();
