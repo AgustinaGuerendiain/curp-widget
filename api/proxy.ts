@@ -1,28 +1,28 @@
-// api/proxy.ts
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import axios from "axios";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Método no permitido" });
+    res.status(405).json({ error: "Método no permitido" });
+    return;
   }
 
   const { endpoint, data, apiKey } = req.body;
 
   if (!endpoint || !data || !apiKey) {
-    return res.status(400).json({ error: "Faltan datos requeridos" });
+    res.status(400).json({ error: "Faltan datos" });
+    return;
   }
 
-  const allowedEndpoints = ["curp/query", "curp/reverse-query"];
-  if (!allowedEndpoints.includes(endpoint)) {
-    return res.status(400).json({ error: "Endpoint no permitido" });
+  const allowed = ["curp/query", "curp/reverse-query"];
+  if (!allowed.includes(endpoint)) {
+    res.status(400).json({ error: "Endpoint no permitido" });
+    return;
   }
 
   try {
     const formData = new URLSearchParams();
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value as string);
-    });
+    Object.entries(data).forEach(([k, v]) => formData.append(k, String(v)));
 
     const response = await axios.post(`https://identity.sandbox.prometeoapi.com/${endpoint}`, formData, {
       headers: {
@@ -32,9 +32,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       },
     });
 
-    return res.status(200).json(response.data);
-  } catch (err: any) {
-    console.error("Error en proxy:", err.message);
-    return res.status(500).json({ error: "Error al consultar la API externa" });
+    res.status(200).json(response.data);
+  } catch (error: any) {
+    console.error("Error en proxy Vercel:", error.response?.data || error.message);
+    res.status(500).json({ error: "Error al consultar API externa" });
   }
 }
