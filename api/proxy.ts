@@ -7,6 +7,8 @@ module.exports = async (req, res) => {
 
   const { endpoint, data, apiKey } = req.body;
 
+  console.log("REQ!!!", req);
+
   if (!endpoint || !data || !apiKey) {
     return res.status(400).json({ error: "Faltan datos" });
   }
@@ -20,17 +22,13 @@ module.exports = async (req, res) => {
     const formData = new URLSearchParams();
     Object.entries(data).forEach(([k, v]) => formData.append(k, String(v)));
 
-    const response = await axios.post(
-      `https://identity.sandbox.prometeoapi.com/${endpoint}`,
-      formData,
-      {
-        headers: {
-          "X-API-Key": apiKey,
-          "Content-Type": "application/x-www-form-urlencoded",
-          Accept: "application/json",
-        },
-      }
-    );
+    const response = await axios.post(`https://identity.sandbox.prometeoapi.com/${endpoint}`, formData, {
+      headers: {
+        "X-API-Key": apiKey,
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+    });
 
     res.status(200).json(response.data);
   } catch (error) {
