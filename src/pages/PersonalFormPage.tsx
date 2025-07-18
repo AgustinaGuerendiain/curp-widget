@@ -7,9 +7,9 @@ import CustomButton from '../components/Button';
 import ResultBox from '../components/ResultBox';
 import { queryByPersonalData } from '../services/curpService';
 import { usePersonalQueryStore } from '../store/usePersonalQueryStore';
-import { useEffect, useState } from 'react';
 import InputDate from '../components/InputDate';
 import { MEXICAN_STATES } from '../const';
+import { useApiKey } from '../hooks/useApiKey';
 
 
 const genderOptions = [
@@ -27,16 +27,7 @@ const PersonalFormPage = () => {
     result,
   } = usePersonalQueryStore();
 
-  const [apiKeyMissing, setApiKeyMissing] = useState(false);
-
-  const params = new URLSearchParams(window.location.search);
-  const apiKey = params.get('APIKey');
-   
-  useEffect(() => {
-    if (!apiKey) {
-      setApiKeyMissing(true);
-    }
-  }, [apiKey]);
+  const apiKey = useApiKey();
 
   const onSubmit = async (data: any) => {
     if (!apiKey) return;
@@ -70,7 +61,7 @@ const PersonalFormPage = () => {
     }
   };
 
-  if (apiKeyMissing) {
+  if (!apiKey) {
     return (
       <Typography color="error" mt={4}>
         Falta el parámetro APIKey en la URL. Este widget requiere una API Key válida para funcionar.

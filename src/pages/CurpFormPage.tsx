@@ -5,22 +5,13 @@ import CustomButton from '../components/Button';
 import ResultBox from '../components/ResultBox';
 import { queryByCurp } from '../services/curpService';
 import { useCurpQueryStore } from '../store/useCurpQueryStore';
-import { useEffect, useState } from 'react';
+import { useApiKey } from '../hooks/useApiKey';
 
 const CurpFormPage = () => {
   const { control, handleSubmit } = useForm();
   const { setLoading, setError, setResult, error, result } = useCurpQueryStore();
 
-  const [apiKeyMissing, setApiKeyMissing] = useState(false);
-
-  const params = new URLSearchParams(window.location.search);
-  const apiKey = params.get('APIKey');
-
-  useEffect(() => {
-    if (!apiKey) {
-      setApiKeyMissing(true);
-    }
-  }, [apiKey]);
+  const apiKey = useApiKey();
 
   const onSubmit = async (data: any) => {
     if (!apiKey) return;
@@ -44,7 +35,7 @@ const CurpFormPage = () => {
     }
   };
 
-  if (apiKeyMissing) {
+  if (!apiKey) {
     return (
       <Typography color="error" mt={4}>
         Falta el parámetro APIKey en la URL. Este widget requiere una API Key válida para funcionar.
