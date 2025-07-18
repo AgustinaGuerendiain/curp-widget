@@ -24,7 +24,15 @@ export default async (req, res) => {
 
   try {
     const formData = new URLSearchParams();
-    Object.entries(data).forEach(([k, v]) => formData.append(k, String(v)));
+
+    let parsedData = data;
+
+    if (typeof data === "string") {
+      parsedData = JSON.parse(data);
+    } 
+
+    Object.entries(parsedData).forEach(([k, v]) => formData.append(k, String(v)));
+
 
     const response = await axios.post(`https://identity.sandbox.prometeoapi.com/${endpoint}`, formData, {
       headers: {
