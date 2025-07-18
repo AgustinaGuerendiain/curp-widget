@@ -2,17 +2,14 @@ import axios from "axios";
 import { format } from "date-fns";
 import type { CurpAPIResponse } from "../types/curp";
 
-const API_BASE = "https://identity.sandbox.prometeoapi.com";
-
 export const queryByCurp = async (curp: string, apiKey: string): Promise<CurpAPIResponse> => {
   try {
-    const response = await axios.post(`${API_BASE}/curp/query`, new URLSearchParams({ curp }), {
-      headers: {
-        "X-API-Key": apiKey,
-        "Content-Type": "application/x-www-form-urlencoded",
-        Accept: "application/json",
-      },
+    const response = await axios.post("/api/proxy", {
+      endpoint: "curp/query",
+      data: { curp },
+      apiKey,
     });
+
     return response.data;
   } catch (error) {
     console.error("Error al consultar por CURP:", error);
@@ -32,21 +29,17 @@ export const queryByPersonalData = async (
   apiKey: string
 ): Promise<CurpAPIResponse> => {
   try {
-    const params = new URLSearchParams({
-      name: data.name,
-      first_surname: data.first_surname,
-      last_surname: data.last_surname,
-      gender: data.gender,
-      state: data.state,
-      birthdate: format(data.birthdate, "dd/MM/yyyy"),
-    });
-
-    const response = await axios.post(`${API_BASE}/curp/reverse-query`, params, {
-      headers: {
-        "X-API-Key": apiKey,
-        "Content-Type": "application/x-www-form-urlencoded",
-        Accept: "application/json",
+    const response = await axios.post("/api/proxy", {
+      endpoint: "curp/reverse-query",
+      data: {
+        name: data.name,
+        first_surname: data.first_surname,
+        last_surname: data.last_surname,
+        gender: data.gender,
+        state: data.state,
+        birthdate: format(data.birthdate, "dd/MM/yyyy"),
       },
+      apiKey,
     });
 
     return response.data;
