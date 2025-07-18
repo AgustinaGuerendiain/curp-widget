@@ -8,8 +8,6 @@ export default async (req, res) => {
 
   const { endpoint, data, apiKey } = req.body;
 
-  console.log("REQ!!!", req);
-
   console.log("data", data);
   console.log("endpoint", endpoint);
 
@@ -33,6 +31,7 @@ export default async (req, res) => {
 
     Object.entries(parsedData).forEach(([k, v]) => formData.append(k, String(v)));
 
+    console.log("formData", formData.toString());
 
     const response = await axios.post(`https://identity.sandbox.prometeoapi.com/${endpoint}`, formData, {
       headers: {
