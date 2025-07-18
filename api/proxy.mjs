@@ -10,6 +10,9 @@ export default async (req, res) => {
 
   console.log("REQ!!!", req);
 
+  console.log("data", data);
+  console.log("endpoint", endpoint);
+
   if (!endpoint || !data || !apiKey) {
     return res.status(400).json({ error: "Faltan datos" });
   }
