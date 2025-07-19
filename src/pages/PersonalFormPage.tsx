@@ -9,7 +9,8 @@ import { queryByPersonalData } from '../services/curpService';
 import { usePersonalQueryStore } from '../store/usePersonalQueryStore';
 import InputDate from '../components/InputDate';
 import { MEXICAN_STATES } from '../const';
-import { useApiKey } from '../hooks/useApiKey';
+import { useApiKeyStore } from '../store/useApiKeyStore';
+import { useTranslation } from 'react-i18next';
 
 
 const genderOptions = [
@@ -18,6 +19,7 @@ const genderOptions = [
 ];
 
 const PersonalFormPage = () => {
+  const { t } = useTranslation();
   const { control, handleSubmit } = useForm();
   const {
     setLoading,
@@ -27,7 +29,7 @@ const PersonalFormPage = () => {
     result,
   } = usePersonalQueryStore();
 
-  const apiKey = useApiKey();
+const apiKey = useApiKeyStore(state => state.apiKey);
 
   const onSubmit = async (data: any) => {
     if (!apiKey) return;
@@ -64,7 +66,7 @@ const PersonalFormPage = () => {
   if (!apiKey) {
     return (
       <Typography color="error" mt={4}>
-        Falta el parámetro APIKey en la URL. Este widget requiere una API Key válida para funcionar.
+        {t('missing_api_key')}
       </Typography>
     );
   }
@@ -73,49 +75,49 @@ const PersonalFormPage = () => {
     <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
       <Input
         name="name"
-        label="Nombre"
+        label={t('form.name_label')}
         control={control}
-        rules={{ required: 'Campo obligatorio' }}
+        rules={{ required: t('form.name_required') }}
       />
 
       <Input
         name="first_surname"
-        label="Primer apellido"
+        label={t('form.surname_label')}
         control={control}
-        rules={{ required: 'Campo obligatorio' }}
+        rules={{ required: t('form.surname_required') }}
       />
 
       <Input
         name="last_surname"
-        label="Segundo apellido"
+        label={t('form.second_surname_label')}
         control={control}
-        rules={{ required: 'Campo obligatorio' }}
+        rules={{ required: t('form.second_surname_required') }}
       />
 
       <InputDate
         name="birthdate"
-        label="Fecha de nacimiento"
+        label={t('form.birth_date_label')}
         control={control}
-        rules={{ required: 'Campo obligatorio' }}
+        rules={{ required: t('form.birth_date_required') }}
       />
 
       <Dropdown
         name="gender"
-        label="Género"
+        label={t('form.gender_label')}
         control={control}
         options={genderOptions}
-        rules={{ required: 'Selecciona una opción' }}
+        rules={{ required: t('form.gender_required') }}
       />
 
       <Dropdown
         name="state"
-        label="Estado de nacimiento"
+        label={t('form.state_label')}
         control={control}
         options={MEXICAN_STATES}
-        rules={{ required: 'Selecciona un estado' }}
+        rules={{ required: t('form.state_required') }}
       />
 
-      <CustomButton>Validar CURP</CustomButton>
+      <CustomButton>{t('validate_button')}</CustomButton>
 
       {error && (
         <Typography color="error" mt={2}>

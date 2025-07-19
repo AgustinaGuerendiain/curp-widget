@@ -9,6 +9,8 @@ const CustomButton = ({ children, fullWidth = true }: CustomButtonProps) => {
       type="submit"
       fullWidth={fullWidth}
       sx={{ mt: 2 }}
+      size="medium"
+      style={{ borderRadius: '8px' }}
     >
       {children}
     </Button>

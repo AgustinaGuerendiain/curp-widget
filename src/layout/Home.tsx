@@ -1,10 +1,12 @@
 import { Box, Container, Tab, Tabs } from '@mui/material';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { PATHS } from '../navigation/paths';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const { t } = useTranslation();
   const location = useLocation();
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Container maxWidth="sm" sx={{ pt: 4 }}>
@@ -14,11 +16,11 @@ const Home = () => {
          centered
          variant="fullWidth"
        >
-         <Tab label="Por CURP" value={PATHS.CURP} />
-        <Tab label="Por Datos Personales" value={PATHS.PERSONAL} />
+         <Tab label={t('tab1_label')} value={PATHS.CURP} />
+         <Tab label={t('tab2_label')} value={PATHS.PERSONAL} />
        </Tabs>
 
-       <Box mt={4}>
+       <Box mt={1}>
          <Outlet />
        </Box>
     </Container>

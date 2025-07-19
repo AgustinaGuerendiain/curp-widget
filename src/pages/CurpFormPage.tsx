@@ -5,13 +5,16 @@ import CustomButton from '../components/Button';
 import ResultBox from '../components/ResultBox';
 import { queryByCurp } from '../services/curpService';
 import { useCurpQueryStore } from '../store/useCurpQueryStore';
-import { useApiKey } from '../hooks/useApiKey';
+import { useApiKeyStore } from '../store/useApiKeyStore';
+import { useTranslation } from 'react-i18next';
 
 const CurpFormPage = () => {
+  const { t } = useTranslation();
+
   const { control, handleSubmit } = useForm();
   const { setLoading, setError, setResult, error, result } = useCurpQueryStore();
 
-  const apiKey = useApiKey();
+ const apiKey = useApiKeyStore(state => state.apiKey);
 
   const onSubmit = async (data: any) => {
     if (!apiKey) return;
@@ -38,7 +41,7 @@ const CurpFormPage = () => {
   if (!apiKey) {
     return (
       <Typography color="error" mt={4}>
-        Falta el parámetro APIKey en la URL. Este widget requiere una API Key válida para funcionar.
+        {t('missing_api_key')}
       </Typography>
     );
   }
@@ -47,12 +50,12 @@ const CurpFormPage = () => {
     <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
       <Input
         name="curp"
-        label="CURP"
+        label={t('curp_label')}
         control={control}
-        rules={{ required: 'Este campo es obligatorio' }}
+        rules={{ required: t('curp_required') }}
       />
 
-      <CustomButton>Validar CURP</CustomButton>
+      <CustomButton>{t('validate_button')}</CustomButton>
 
       {error && (
         <Typography color="error" mt={2}>

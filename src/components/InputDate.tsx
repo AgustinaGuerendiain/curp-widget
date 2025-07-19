@@ -25,6 +25,12 @@ const InputDate = ({ name, label, control, rules }: InputDateProps) => {
               helperText: error?.message,
             },
           }}
+          sx={{
+            '& .MuiPickersOutlinedInput-root': {
+              borderRadius: '8px',
+            },
+            marginTop: '8px',
+          }}
         />
       )}
     />

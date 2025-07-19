@@ -1,0 +1,27 @@
+{
+  "curp_label": "CURP",
+  "tab1_label": "By CURP",
+  "tab2_label": "By Personal Data",
+  "curp_required": "The CURP is required.",
+  "validate_button": "Verify",
+  "missing_api_key": "Missing APIKey parameter in URL. A valid API Key is required.",
+  "not_found": "CURP not found or invalid.",
+  "error_generic": "There was an error querying the CURP",
+  "form":
+    {
+      "name_label": "Name",
+      "surname_label": "Surname", 
+      "second_surname_label": "Second Surname",
+      "birth_date_label": "Birth Date", 
+      "birth_place_label": "Birth Place", 
+      "curp_label": "CURP",
+      "gender_label": "Gender",
+      "gender_required": "Gender is required.",
+      "birth_date_required": "Birth date is required.",
+      "surname_required": "Surname is required.",
+      "second_surname_required": "Second surname is required.",
+      "state_label": "State of Birth",
+      "state_required": "State of birth is required.",
+      "name_required": "Name is required."
+    }
+}

@@ -17,12 +17,17 @@ const Dropdown = ({ name, label, control, rules, options }: DropdownProps) => {
       rules={rules}
       defaultValue=""
       render={({ field, fieldState: { error } }) => (
-        <FormControl fullWidth margin="normal" error={!!error}>
+        <FormControl fullWidth margin="normal" error={!!error} style={{ marginTop: '8px' }}>
           <InputLabel>{label}</InputLabel>
           <Select
             {...field}
             label={label}
             value={field.value || ''}
+             sx={{
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderRadius: '8px',
+              },
+            }}
           >
             {options.map((option) => (
               <MenuItem key={option.value} value={option.value}>

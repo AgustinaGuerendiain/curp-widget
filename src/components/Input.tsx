@@ -20,7 +20,14 @@ const Input = ({ name, label, control, rules, type = 'text', placeholder }: Form
           helperText={error?.message}
           variant="outlined"
           margin="normal"
-        />
+          size="small"    
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              borderRadius: '8px',
+            },
+            marginTop: '8px',
+          }}
+          />
       )}
     />
   );
