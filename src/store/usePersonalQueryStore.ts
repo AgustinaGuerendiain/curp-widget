@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import type { CurpResponseData } from "../types/curp";
+import { create } from 'zustand';
+import type { CurpResponseData } from '../types/curp';
 
 interface PersonalQueryStore {
   loading: boolean;

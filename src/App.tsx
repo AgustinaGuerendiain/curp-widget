@@ -25,7 +25,6 @@ function App() {
     if (lang === 'es' || lang === 'en') {
       i18n.changeLanguage(lang);
     }
-
   }, [location.search, setApiKey]);
 
   return routing;

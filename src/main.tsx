@@ -1,8 +1,8 @@
 import './i18n';
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import App from './App.tsx';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import theme from './theme.js';
 import { BrowserRouter } from 'react-router-dom';
@@ -13,11 +13,11 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <CssBaseline />
-            <App />
-          </LocalizationProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <CssBaseline />
+          <App />
+        </LocalizationProvider>
       </ThemeProvider>
     </BrowserRouter>
-  </StrictMode>,
-)
+  </StrictMode>
+);

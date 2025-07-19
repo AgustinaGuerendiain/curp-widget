@@ -8,7 +8,6 @@ import {
 import { Controller } from 'react-hook-form';
 import type { DropdownProps } from '../types/form';
 
-
 const Dropdown = ({ name, label, control, rules, options }: DropdownProps) => {
   return (
     <Controller
@@ -17,13 +16,19 @@ const Dropdown = ({ name, label, control, rules, options }: DropdownProps) => {
       rules={rules}
       defaultValue=""
       render={({ field, fieldState: { error } }) => (
-        <FormControl fullWidth margin="normal" error={!!error} style={{ marginTop: '8px' }}>
+        <FormControl
+          fullWidth
+          margin="normal"
+          error={!!error}
+          style={{ marginTop: '8px' }}
+          size="small"
+        >
           <InputLabel>{label}</InputLabel>
           <Select
             {...field}
             label={label}
             value={field.value || ''}
-             sx={{
+            sx={{
               '& .MuiOutlinedInput-notchedOutline': {
                 borderRadius: '8px',
               },
@@ -39,7 +44,7 @@ const Dropdown = ({ name, label, control, rules, options }: DropdownProps) => {
         </FormControl>
       )}
     />
-  )
-}
+  );
+};
 
-export default Dropdown
+export default Dropdown;

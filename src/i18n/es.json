@@ -7,21 +7,20 @@
   "missing_api_key": "Falta el parámetro APIKey en la URL. Este widget requiere una API Key válida para funcionar.",
   "not_found": "CURP no encontrado o inválido.",
   "error_generic": "Hubo un error al consultar el CURP",
-    "form":
-    {
-      "name_label": "Nombre",
-      "surname_label": "Primer Apellido",
-      "second_surname_label": "Segundo Apellido",
-      "birth_date_label": "Fecha de Nacimiento",
-      "birth_place_label": "Lugar de Nacimiento",
-      "curp_label": "CURP",
-      "gender_label": "Género",
-      "gender_required": "El género es obligatorio.",
-      "birth_date_required": "La fecha de nacimiento es obligatoria.",
-      "surname_required": "El primer apellido es obligatorio.",
-      "second_surname_required": "El segundo apellido es obligatorio.",
-      "state_label": "Estado de Nacimiento",
-      "state_required": "El estado de nacimiento es obligatorio.",
-      "name_required": "El nombre es obligatorio."
-    }
+  "form": {
+    "name_label": "Nombre",
+    "surname_label": "Primer Apellido",
+    "second_surname_label": "Segundo Apellido",
+    "birth_date_label": "Fecha de Nacimiento",
+    "birth_place_label": "Lugar de Nacimiento",
+    "curp_label": "CURP",
+    "gender_label": "Género",
+    "gender_required": "El género es obligatorio.",
+    "birth_date_required": "La fecha de nacimiento es obligatoria.",
+    "surname_required": "El primer apellido es obligatorio.",
+    "second_surname_required": "El segundo apellido es obligatorio.",
+    "state_label": "Estado de Nacimiento",
+    "state_required": "El estado de nacimiento es obligatorio.",
+    "name_required": "El nombre es obligatorio."
+  }
 }

@@ -1,4 +1,4 @@
-import type { Control, FieldValues, RegisterOptions } from "react-hook-form";
+import type { Control, FieldValues, RegisterOptions } from 'react-hook-form';
 
 export interface FormFieldProps {
   name: string;

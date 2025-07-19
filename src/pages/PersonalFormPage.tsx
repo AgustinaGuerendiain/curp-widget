@@ -12,7 +12,6 @@ import { MEXICAN_STATES } from '../const';
 import { useApiKeyStore } from '../store/useApiKeyStore';
 import { useTranslation } from 'react-i18next';
 
-
 const genderOptions = [
   { label: 'Masculino', value: 'H' },
   { label: 'Femenino', value: 'M' },
@@ -21,15 +20,10 @@ const genderOptions = [
 const PersonalFormPage = () => {
   const { t } = useTranslation();
   const { control, handleSubmit } = useForm();
-  const {
-    setLoading,
-    setError,
-    setResult,
-    error,
-    result,
-  } = usePersonalQueryStore();
+  const { setLoading, setError, setResult, error, result } =
+    usePersonalQueryStore();
 
-const apiKey = useApiKeyStore(state => state.apiKey);
+  const apiKey = useApiKeyStore((state) => state.apiKey);
 
   const onSubmit = async (data: any) => {
     if (!apiKey) return;

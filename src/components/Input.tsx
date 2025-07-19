@@ -2,7 +2,14 @@ import type { FormFieldProps } from '../types/form';
 import { Controller } from 'react-hook-form';
 import { TextField } from '@mui/material';
 
-const Input = ({ name, label, control, rules, type = 'text', placeholder }: FormFieldProps)  => {
+const Input = ({
+  name,
+  label,
+  control,
+  rules,
+  type = 'text',
+  placeholder,
+}: FormFieldProps) => {
   return (
     <Controller
       name={name}
@@ -20,17 +27,17 @@ const Input = ({ name, label, control, rules, type = 'text', placeholder }: Form
           helperText={error?.message}
           variant="outlined"
           margin="normal"
-          size="small"    
+          size="small"
           sx={{
             '& .MuiOutlinedInput-root': {
               borderRadius: '8px',
             },
             marginTop: '8px',
           }}
-          />
+        />
       )}
     />
   );
-}
+};
 
-export default Input
+export default Input;

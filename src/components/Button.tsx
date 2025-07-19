@@ -1,5 +1,5 @@
-import { Button } from '@mui/material'
-import type { CustomButtonProps } from '../types/form'
+import { Button } from '@mui/material';
+import type { CustomButtonProps } from '../types/form';
 
 const CustomButton = ({ children, fullWidth = true }: CustomButtonProps) => {
   return (
@@ -10,11 +10,17 @@ const CustomButton = ({ children, fullWidth = true }: CustomButtonProps) => {
       fullWidth={fullWidth}
       sx={{ mt: 2 }}
       size="medium"
-      style={{ borderRadius: '8px' }}
+      style={{
+        borderRadius: '8px',
+        fontWeight: 'bold',
+        letterSpacing: '0.5px',
+        fontSize: '14px',
+        textTransform: 'none',
+      }}
     >
       {children}
     </Button>
-  )
-}
+  );
+};
 
-export default CustomButton
+export default CustomButton;

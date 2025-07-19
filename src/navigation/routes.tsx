@@ -1,10 +1,8 @@
-
 import type { RouteObject } from 'react-router-dom';
 import { PATHS } from './paths';
 import Home from '../layout/Home';
 import { CurpFormPage, PersonalFormPage } from '../pages';
 import RedirectToCurp from './RedirectToCurp';
-
 
 export const routes: RouteObject[] = [
   {
@@ -13,7 +11,7 @@ export const routes: RouteObject[] = [
     children: [
       {
         index: true,
-        element:  <RedirectToCurp />,
+        element: <RedirectToCurp />,
       },
       {
         path: PATHS.CURP,

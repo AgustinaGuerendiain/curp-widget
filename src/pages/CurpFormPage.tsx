@@ -12,9 +12,10 @@ const CurpFormPage = () => {
   const { t } = useTranslation();
 
   const { control, handleSubmit } = useForm();
-  const { setLoading, setError, setResult, error, result } = useCurpQueryStore();
+  const { setLoading, setError, setResult, error, result } =
+    useCurpQueryStore();
 
- const apiKey = useApiKeyStore(state => state.apiKey);
+  const apiKey = useApiKeyStore((state) => state.apiKey);
 
   const onSubmit = async (data: any) => {
     if (!apiKey) return;
@@ -63,7 +64,7 @@ const CurpFormPage = () => {
         </Typography>
       )}
 
-      {result && <ResultBox data={result.personal_data} />} 
+      {result && <ResultBox data={result.personal_data} />}
     </Box>
   );
 };

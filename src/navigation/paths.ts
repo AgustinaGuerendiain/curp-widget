@@ -1,5 +1,5 @@
 export const PATHS = {
-  ROOT: "/",
-  CURP: "/curp",
-  PERSONAL: "/personal",
+  ROOT: '/',
+  CURP: '/curp',
+  PERSONAL: '/personal',
 };

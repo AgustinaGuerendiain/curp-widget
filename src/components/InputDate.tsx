@@ -2,8 +2,6 @@ import { Controller } from 'react-hook-form';
 import { DateField as MuiDateField } from '@mui/x-date-pickers/DateField';
 import type { InputDateProps } from '../types/form';
 
-
-
 const InputDate = ({ name, label, control, rules }: InputDateProps) => {
   return (
     <Controller
@@ -31,6 +29,7 @@ const InputDate = ({ name, label, control, rules }: InputDateProps) => {
             },
             marginTop: '8px',
           }}
+          size="small"
         />
       )}
     />

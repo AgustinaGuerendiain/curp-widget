@@ -10,21 +10,21 @@ const Home = () => {
 
   return (
     <Container maxWidth="sm" sx={{ pt: 4 }}>
-       <Tabs
-         value={location.pathname}
-         onChange={(_, value) => navigate(value)}
-         centered
-         variant="fullWidth"
-       >
-         <Tab label={t('tab1_label')} value={PATHS.CURP} />
-         <Tab label={t('tab2_label')} value={PATHS.PERSONAL} />
-       </Tabs>
+      <Tabs
+        value={location.pathname}
+        onChange={(_, value) => navigate(value)}
+        centered
+        variant="fullWidth"
+      >
+        <Tab label={t('tab1_label')} value={PATHS.CURP} />
+        <Tab label={t('tab2_label')} value={PATHS.PERSONAL} />
+      </Tabs>
 
-       <Box mt={1}>
-         <Outlet />
-       </Box>
+      <Box mt={1}>
+        <Outlet />
+      </Box>
     </Container>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
