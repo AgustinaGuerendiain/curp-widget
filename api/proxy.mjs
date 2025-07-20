@@ -8,6 +8,10 @@ export default async (req, res) => {
 
   const { endpoint, data, apiKey } = req.body;
 
+  console.log('body', req.body);
+  console.log('data', data);
+  console.log('endpoint', endpoint);
+
   if (!endpoint || !data || !apiKey) {
     return res.status(400).json({ error: 'Faltan datos' });
   }
@@ -29,7 +33,8 @@ export default async (req, res) => {
     Object.entries(parsedData).forEach(([k, v]) =>
       formData.append(k, String(v))
     );
-    y;
+
+    console.log('formData', formData.toString());
 
     const response = await axios.post(
       `https://identity.sandbox.prometeoapi.com/${endpoint}`,
