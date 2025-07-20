@@ -21,7 +21,7 @@ const ResultBox = ({ data }: ResultBoxProps) => {
   ];
 
   return (
-    <Paper elevation={2} sx={{ mt: 4, p: 2 }}>
+    <Paper elevation={2} sx={{ p: 2 }}>
       <Typography variant="h6" gutterBottom>
         {t('results.title')}
       </Typography>

@@ -16,6 +16,38 @@ Este widget está pensado para ser embebido dentro de una página externa median
 ></iframe>
 ```
 
+A continuación dejo un HTML completo para copiar y pegar directamente
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Test del Widget CURP</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      iframe {
+        width: 100%;
+        height: 600px;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Widget CURP embebido</h2>
+
+    <iframe
+      src="curp-widget.vercel.app?APIKey=API_KEY&lang=en"
+      allow="clipboard-write"
+    ></iframe>
+  </body>
+</html>
+```
+
 ---
 
 ## Parámetros soportados
@@ -96,6 +128,9 @@ Este widget fue deployado en Vercel para contar con:
 ---
 
 ## To Do / Mejoras posibles
+
+- Agregar test
+- Autocompletado de datos
 
 ---
 

@@ -42,7 +42,7 @@ const ResultPage = () => {
   if (!result) return null;
 
   return (
-    <Box sx={{ maxWidth: 700, mx: 'auto', mt: 4, p: 2 }}>
+    <Box sx={{ maxWidth: 700, mx: 'auto', p: 2 }}>
       <ResultBox data={result.personal_data} />
 
       <Button

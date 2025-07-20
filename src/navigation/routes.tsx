@@ -21,10 +21,10 @@ export const routes: RouteObject[] = [
         path: PATHS.PERSONAL,
         element: <PersonalFormPage />,
       },
-      {
-        path: PATHS.RESULTS,
-        element: <ResultPage />,
-      },
     ],
+  },
+  {
+    path: PATHS.RESULTS,
+    element: <ResultPage />,
   },
 ];
