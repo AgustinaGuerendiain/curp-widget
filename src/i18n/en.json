@@ -22,5 +22,18 @@
     "state_label": "State of Birth",
     "state_required": "State of birth is required.",
     "name_required": "Name is required."
+  },
+  "results": {
+    "title": "Results",
+    "curp_label": "CURP",
+    "name_label": "Name",
+    "surname_label": "Surname",
+    "second_surname_label": "Second Surname",
+    "birth_date_label": "Birth Date",
+    "birth_place_label": "Birth Place",
+    "gender_label": "Gender",
+    "nationality_label": "Nationality",
+    "state_label": "State of Birth",
+    "return_button": "Return to Form"
   }
 }

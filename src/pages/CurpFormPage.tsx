@@ -1,20 +1,20 @@
 import { Box, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input';
 import CustomButton from '../components/Button';
-import ResultBox from '../components/ResultBox';
 import { queryByCurp } from '../services/curpService';
 import { useCurpQueryStore } from '../store/useCurpQueryStore';
 import { useApiKeyStore } from '../store/useApiKeyStore';
 import { useTranslation } from 'react-i18next';
+import { PATHS } from '../navigation/paths';
 
 const CurpFormPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const { control, handleSubmit } = useForm();
-  const { setLoading, setError, setResult, error, result } =
-    useCurpQueryStore();
-
+  const { setLoading, setError, setResult, error } = useCurpQueryStore();
   const apiKey = useApiKeyStore((state) => state.apiKey);
 
   const onSubmit = async (data: any) => {
@@ -31,6 +31,7 @@ const CurpFormPage = () => {
         setError('CURP no encontrado o inválido.');
       } else {
         setResult(response.data);
+        navigate(PATHS.RESULTS);
       }
     } catch (err) {
       setError('Hubo un error al consultar el CURP');
@@ -63,8 +64,6 @@ const CurpFormPage = () => {
           {error}
         </Typography>
       )}
-
-      {result && <ResultBox data={result.personal_data} />}
     </Box>
   );
 };

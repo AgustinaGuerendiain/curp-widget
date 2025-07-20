@@ -1,7 +1,7 @@
 import type { RouteObject } from 'react-router-dom';
 import { PATHS } from './paths';
 import Home from '../layout/Home';
-import { CurpFormPage, PersonalFormPage } from '../pages';
+import { CurpFormPage, PersonalFormPage, ResultPage } from '../pages';
 import RedirectToCurp from './RedirectToCurp';
 
 export const routes: RouteObject[] = [
@@ -20,6 +20,10 @@ export const routes: RouteObject[] = [
       {
         path: PATHS.PERSONAL,
         element: <PersonalFormPage />,
+      },
+      {
+        path: PATHS.RESULTS,
+        element: <ResultPage />,
       },
     ],
   },

@@ -1,16 +1,16 @@
 import { Box, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import Input from '../components/Input';
 import Dropdown from '../components/Dropdown';
-
+import InputDate from '../components/InputDate';
 import CustomButton from '../components/Button';
-import ResultBox from '../components/ResultBox';
 import { queryByPersonalData } from '../services/curpService';
 import { usePersonalQueryStore } from '../store/usePersonalQueryStore';
-import InputDate from '../components/InputDate';
-import { MEXICAN_STATES } from '../const';
 import { useApiKeyStore } from '../store/useApiKeyStore';
+import { MEXICAN_STATES } from '../const';
 import { useTranslation } from 'react-i18next';
+import { PATHS } from '../navigation/paths';
 
 const genderOptions = [
   { label: 'Masculino', value: 'H' },
@@ -19,10 +19,10 @@ const genderOptions = [
 
 const PersonalFormPage = () => {
   const { t } = useTranslation();
-  const { control, handleSubmit } = useForm();
-  const { setLoading, setError, setResult, error, result } =
-    usePersonalQueryStore();
+  const navigate = useNavigate();
 
+  const { control, handleSubmit } = useForm();
+  const { setLoading, setError, setResult, error } = usePersonalQueryStore();
   const apiKey = useApiKeyStore((state) => state.apiKey);
 
   const onSubmit = async (data: any) => {
@@ -49,6 +49,7 @@ const PersonalFormPage = () => {
         setError('Los datos no coinciden con ningún registro.');
       } else {
         setResult(response.data);
+        navigate(PATHS.RESULTS);
       }
     } catch (err) {
       setError('Hubo un error al consultar los datos personales.');
@@ -118,8 +119,6 @@ const PersonalFormPage = () => {
           {error}
         </Typography>
       )}
-
-      {result && <ResultBox data={result.personal_data} />}
     </Box>
   );
 };

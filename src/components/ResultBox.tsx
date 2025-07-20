@@ -1,44 +1,39 @@
 import { Paper, Typography, Box, Divider } from '@mui/material';
 import type { PersonalData } from '../types/curp';
+import { useTranslation } from 'react-i18next';
 
 interface ResultBoxProps {
   data: PersonalData;
 }
 
 const ResultBox = ({ data }: ResultBoxProps) => {
+  const { t } = useTranslation();
+
+  const fields: { label: string; value: string | undefined }[] = [
+    { label: 'CURP', value: data.curp },
+    { label: t('results.name_label'), value: data.nombres },
+    { label: t('results.surname_label'), value: data.primerApellido },
+    { label: t('results.second_surname_label'), value: data.segundoApellido },
+    { label: t('results.birth_date_label'), value: data.fechaNacimiento },
+    { label: t('results.gender_label'), value: data.sexo },
+    { label: t('results.nationality_label'), value: data.nacionalidad },
+    { label: t('results.state_label'), value: data.entidad },
+  ];
+
   return (
     <Paper elevation={2} sx={{ mt: 4, p: 2 }}>
       <Typography variant="h6" gutterBottom>
-        Resultado de búsqueda
+        {t('results.title')}
       </Typography>
 
       <Divider sx={{ mb: 2 }} />
 
       <Box display="flex" flexDirection="column" gap={1}>
-        <Typography variant="body2">
-          <strong>CURP:</strong> {data.curp}
-        </Typography>
-        <Typography variant="body2">
-          <strong>Nombre:</strong> {data.nombres}
-        </Typography>
-        <Typography variant="body2">
-          <strong>Primer apellido:</strong> {data.primerApellido}
-        </Typography>
-        <Typography variant="body2">
-          <strong>Segundo apellido:</strong> {data.segundoApellido}
-        </Typography>
-        <Typography variant="body2">
-          <strong>Fecha de nacimiento:</strong> {data.fechaNacimiento}
-        </Typography>
-        <Typography variant="body2">
-          <strong>Sexo:</strong> {data.sexo}
-        </Typography>
-        <Typography variant="body2">
-          <strong>Nacionalidad:</strong> {data.nacionalidad}
-        </Typography>
-        <Typography variant="body2">
-          <strong>Entidad de nacimiento:</strong> {data.entidad}
-        </Typography>
+        {fields.map(({ label, value }) => (
+          <Typography key={label} variant="body2">
+            <strong>{label}:</strong> {value}
+          </Typography>
+        ))}
       </Box>
     </Paper>
   );

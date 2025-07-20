@@ -22,5 +22,18 @@
     "state_label": "Estado de Nacimiento",
     "state_required": "El estado de nacimiento es obligatorio.",
     "name_required": "El nombre es obligatorio."
+  },
+  "results": {
+    "title": "Resultado",
+    "curp_label": "CURP",
+    "name_label": "Nombre",
+    "surname_label": "Primer Apellido",
+    "second_surname_label": "Segundo Apellido",
+    "birth_date_label": "Fecha de Nacimiento",
+    "birth_place_label": "Lugar de Nacimiento",
+    "gender_label": "Género",
+    "nationality_label": "Nacionalidad",
+    "state_label": "Estado de Nacimiento",
+    "return_button": "Regresar al Formulario"
   }
 }
