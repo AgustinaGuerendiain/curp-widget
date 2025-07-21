@@ -8,14 +8,18 @@ import { useCurpQueryStore } from '../store/useCurpQueryStore';
 import { useApiKeyStore } from '../store/useApiKeyStore';
 import { useTranslation } from 'react-i18next';
 import { PATHS } from '../navigation/paths';
+import { useCurpHistory } from '../hooks/useCurpHistory';
 
 const CurpFormPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm({
+    mode: 'all',
+  });
   const { setLoading, setError, setResult, error } = useCurpQueryStore();
   const apiKey = useApiKeyStore((state) => state.apiKey);
+  const { addCurp } = useCurpHistory();
 
   const onSubmit = async (data: any) => {
     if (!apiKey) return;
@@ -32,6 +36,10 @@ const CurpFormPage = () => {
       } else {
         setResult(response.data);
         navigate(PATHS.RESULTS);
+
+        if (response.data?.personal_data?.curp) {
+          addCurp(response.data.personal_data.curp);
+        }
       }
     } catch (err) {
       setError('Hubo un error al consultar el CURP');

@@ -49,6 +49,14 @@ const ResultPage = () => {
         onClick={handleBack}
         variant="contained"
         sx={{ mt: 3, display: 'block', mx: 'auto' }}
+        size="medium"
+        style={{
+          borderRadius: '8px',
+          fontWeight: 'bold',
+          letterSpacing: '0.5px',
+          fontSize: '14px',
+          textTransform: 'none',
+        }}
       >
         {t('results.return_button')}
       </Button>

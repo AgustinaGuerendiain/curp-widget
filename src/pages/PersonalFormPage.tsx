@@ -1,16 +1,14 @@
 import { Box, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import Input from '../components/Input';
-import Dropdown from '../components/Dropdown';
-import InputDate from '../components/InputDate';
-import CustomButton from '../components/Button';
 import { queryByPersonalData } from '../services/curpService';
 import { usePersonalQueryStore } from '../store/usePersonalQueryStore';
 import { useApiKeyStore } from '../store/useApiKeyStore';
 import { MEXICAN_STATES } from '../const';
 import { useTranslation } from 'react-i18next';
 import { PATHS } from '../navigation/paths';
+import { useCurpHistory } from '../hooks/useCurpHistory';
+import { CustomButton, Dropdown, Input, InputDate } from '../components';
 
 const genderOptions = [
   { label: 'Masculino', value: 'H' },
@@ -21,9 +19,12 @@ const PersonalFormPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm({
+    mode: 'all',
+  });
   const { setLoading, setError, setResult, error } = usePersonalQueryStore();
   const apiKey = useApiKeyStore((state) => state.apiKey);
+  const { addCurp } = useCurpHistory();
 
   const onSubmit = async (data: any) => {
     if (!apiKey) return;
@@ -50,6 +51,10 @@ const PersonalFormPage = () => {
       } else {
         setResult(response.data);
         navigate(PATHS.RESULTS);
+
+        if (response.data?.personal_data?.curp) {
+          addCurp(response.data.personal_data.curp);
+        }
       }
     } catch (err) {
       setError('Hubo un error al consultar los datos personales.');
