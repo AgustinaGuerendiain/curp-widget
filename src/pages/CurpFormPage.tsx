@@ -29,12 +29,12 @@ const CurpFormPage = () => {
       const response = await queryByCurp(data.curp, apiKey);
 
       if (response.errors) {
-        handleError(t('no_curp'));
+        handleError(t('error.no_curp'));
       } else {
-        handleSuccess(response.data);
+        handleSuccess(response);
       }
     } catch (err) {
-      handleError(t('error_curp'));
+      handleError(t('error.error_curp'));
     } finally {
       setLoading(false);
     }

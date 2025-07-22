@@ -42,7 +42,7 @@ const PersonalFormPage = () => {
       if (response.errors) {
         handleError(t('no_personal_data'));
       } else {
-        handleSuccess(response.data);
+        handleSuccess(response);
       }
     } catch (err) {
       handleError(t('error.error_personal_data'));
