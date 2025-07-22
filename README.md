@@ -83,6 +83,8 @@ A continuación dejo un HTML completo para copiar y pegar directamente
 | `APIKey`  | `string` | Sí          | Tu API Key personal de Prometeo |
 | `lang`    | `string` | Opcional    | Idioma de la UI (`es` o `en`)   |
 
+\*por default el idioma es `es`
+
 ---
 
 ## Funcionalidades
@@ -114,13 +116,18 @@ A continuación dejo un HTML completo para copiar y pegar directamente
 
 ```
 /src
-  /components     → Inputs reutilizables (Input, Dropdown, DateField, Button)
-  /pages          → Pantallas: CURP, Datos personales
-  /store          → Zustand stores separados por endpoint
-  /services       → Llamadas a API vía proxy interno
-  /types          → Tipos e interfaces de TypeScript
+  /components     → Inputs reutilizables
+  /const          → Constantes compartidas
+  /hooks          → Hooks personalizados
   /i18n           → Traducciones en es/en
-/api
+  /layout         → Componentes de layout
+  /navigation     → Rutas, paths y configuración de navegación con React Router
+  /pages          → Pantallas
+  /services       → Llamadas a API vía proxy interno
+  /store          → Zustand stores separados por endpoint
+  /types          → Tipos e interfaces de TypeScript
+
+  /api
   proxy.mjs       → Backend en Vercel que maneja el CORS
 ```
 
