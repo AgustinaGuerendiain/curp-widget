@@ -15,7 +15,8 @@ const CurpFormPage = () => {
   const { control, handleSubmit } = useForm({
     mode: 'all',
   });
-  const { setLoading, setError, setResult, error } = useCurpQueryStore();
+  const { setLoading, setError, setResult, error, loading } =
+    useCurpQueryStore();
   const apiKey = useApiKeyStore((state) => state.apiKey);
   const { addCurp } = useCurpHistory();
 
@@ -38,6 +39,11 @@ const CurpFormPage = () => {
         if (response.data?.personal_data?.curp) {
           addCurp(response.data.personal_data.curp);
         }
+
+        window.parent.postMessage(
+          { event: 'curpValidated', payload: response.data },
+          '*'
+        );
       }
     } catch (err) {
       setError('Hubo un error al consultar el CURP');
@@ -63,7 +69,7 @@ const CurpFormPage = () => {
         rules={{ required: t('curp_required') }}
       />
 
-      <CustomButton>{t('validate_button')}</CustomButton>
+      <CustomButton loading={loading}>{t('validate_button')}</CustomButton>
 
       {error && (
         <Alert severity="error" sx={{ mt: 2 }}>

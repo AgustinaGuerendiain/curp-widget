@@ -1,3 +1,4 @@
+import type { ButtonProps } from '@mui/material';
 import type { Control, FieldValues, RegisterOptions } from 'react-hook-form';
 
 export interface FormFieldProps {
@@ -29,7 +30,7 @@ export interface DatePickerFieldProps {
   rules?: RegisterOptions;
 }
 
-export interface CustomButtonProps {
+export interface CustomButtonProps extends ButtonProps {
   children: React.ReactNode;
   fullWidth?: boolean;
 }

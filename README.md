@@ -6,7 +6,22 @@ Este proyecto es un widget frontend embebible, desarrollado como SPA con React, 
 
 Este widget está pensado para ser embebido dentro de una página externa mediante un `<iframe>`, recibiendo los parámetros necesarios vía URL.
 
-### Ejemplo de uso
+Ademas el widget CURP comunica eventos al sitio host mediante la API `window.postMessage`, en este caso lo hace cuando una consulta de CURP se realiza exitosamente. A continuación dejo el fagmento de codigo a agregar si se quiere utilizar esto.
+
+```html
+<script>
+  window.addEventListener('message', (event) => {
+    if (
+      event.data?.event === 'curpValidated' &&
+      event.origin === 'https://curp-widget.vercel.app'
+    ) {
+      alert('Consulta CURP exitosa');
+    }
+  });
+</script>
+```
+
+### Ejemplo de uso completo
 
 ```html
 <iframe
@@ -44,6 +59,17 @@ A continuación dejo un HTML completo para copiar y pegar directamente
       src="curp-widget.vercel.app?APIKey=API_KEY&lang=en"
       allow="clipboard-write"
     ></iframe>
+
+    <script>
+      window.addEventListener('message', (event) => {
+        if (
+          event.data?.event === 'curpValidated' &&
+          event.origin === 'https://curp-widget.vercel.app'
+        ) {
+          alert('Consulta CURP exitosa');
+        }
+      });
+    </script>
   </body>
 </html>
 ```
@@ -54,8 +80,8 @@ A continuación dejo un HTML completo para copiar y pegar directamente
 
 | Parámetro | Tipo     | Obligatorio | Descripción                     |
 | --------- | -------- | ----------- | ------------------------------- |
-| `APIKey`  | `string` | ✅ Sí       | Tu API Key personal de Prometeo |
-| `lang`    | `string` | ❌ Opcional | Idioma de la UI (`es` o `en`)   |
+| `APIKey`  | `string` | Sí          | Tu API Key personal de Prometeo |
+| `lang`    | `string` | Opcional    | Idioma de la UI (`es` o `en`)   |
 
 ---
 
@@ -76,7 +102,7 @@ A continuación dejo un HTML completo para copiar y pegar directamente
 | ------------------- | ------------------------------------------------------------------------ |
 | **React + Vite**    | Rápido, modular, óptimo para SPA embebibles                              |
 | **TypeScript**      | Seguridad de tipos, ideal para APIs externas                             |
-| **Material UI**     | Componentes accesibles, productivos, responsivos                         |
+| **Material UI**     | Componentes accesibles, responsivos, construir rapido                    |
 | **React Hook Form** | Validación eficiente y controlada de formularios                         |
 | **Zustand**         | Store simple para manejar estados como loading, error y resultado        |
 | **Axios**           | Cliente HTTP robusto, con soporte para interceptores y manejo de errores |
@@ -119,18 +145,18 @@ npm run dev
 
 ## Deploy
 
-Este widget fue deployado en Vercel para contar con:
+Este widget fue deployado en Vercel:
 
 - URL pública
 - API Serverless
-- HTTPS y velocidad optimizada
 
 ---
 
 ## To Do / Mejoras posibles
 
-- Agregar test
+- Agregar tests
 - Autocompletado de datos
+- Realizar un mejor manejo de datos de lo que se le envia al host.
 
 ---
 

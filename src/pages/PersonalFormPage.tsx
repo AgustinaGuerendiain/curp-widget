@@ -21,7 +21,8 @@ const PersonalFormPage = () => {
   const { control, handleSubmit } = useForm({
     mode: 'all',
   });
-  const { setLoading, setError, setResult, error } = usePersonalQueryStore();
+  const { setLoading, setError, setResult, error, loading } =
+    usePersonalQueryStore();
   const apiKey = useApiKeyStore((state) => state.apiKey);
   const { addCurp } = useCurpHistory();
 
@@ -54,6 +55,11 @@ const PersonalFormPage = () => {
         if (response.data?.personal_data?.curp) {
           addCurp(response.data.personal_data.curp);
         }
+
+        window.parent.postMessage(
+          { event: 'curpValidated', payload: response.data },
+          '*'
+        );
       }
     } catch (err) {
       setError('Hubo un error al consultar los datos personales.');
@@ -119,7 +125,7 @@ const PersonalFormPage = () => {
             rules={{ required: t('form.state_required') }}
           />
         </Grid>
-        <CustomButton>{t('validate_button')}</CustomButton>
+        <CustomButton loading={loading}>{t('validate_button')}</CustomButton>
       </Grid>
 
       {error && (
