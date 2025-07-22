@@ -5,7 +5,6 @@ import { TextField } from '@mui/material';
 const Input = ({
   name,
   label,
-  control,
   rules,
   type = 'text',
   placeholder,
@@ -13,7 +12,6 @@ const Input = ({
   return (
     <Controller
       name={name}
-      control={control}
       rules={rules}
       defaultValue=""
       render={({ field, fieldState: { error } }) => (
@@ -24,7 +22,7 @@ const Input = ({
           type={type}
           placeholder={placeholder}
           error={!!error}
-          helperText={error?.message}
+          helperText={error ? error.message : ' '}
           variant="outlined"
           margin="normal"
           size="small"
@@ -32,7 +30,7 @@ const Input = ({
             '& .MuiOutlinedInput-root': {
               borderRadius: '8px',
             },
-            marginTop: '8px',
+            marginTop: '4px',
           }}
         />
       )}

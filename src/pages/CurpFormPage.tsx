@@ -1,24 +1,22 @@
-import { Alert, Box } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Alert } from '@mui/material';
 import { queryByCurp } from '../services/curpService';
 import { useTranslation } from 'react-i18next';
-import { PATHS } from '../navigation/paths';
-import { useCurpHistory } from '../hooks/useCurpHistory';
-import { CustomButton, Input } from '../components';
+import { FormWrapper, Input } from '../components';
 import { useApiKeyStore, useCurpQueryStore } from '../store';
+import { useFormHook } from '../hooks';
 
 const CurpFormPage = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm({
-    mode: 'all',
-  });
   const { setLoading, setError, setResult, error, loading } =
     useCurpQueryStore();
+
   const apiKey = useApiKeyStore((state) => state.apiKey);
-  const { addCurp } = useCurpHistory();
+
+  const { handleSuccess, handleError } = useFormHook({
+    setResult,
+    setError,
+  });
 
   const onSubmit = async (data: any) => {
     if (!apiKey) return;
@@ -31,22 +29,12 @@ const CurpFormPage = () => {
       const response = await queryByCurp(data.curp, apiKey);
 
       if (response.errors) {
-        setError('CURP no encontrado o inválido.');
+        handleError(t('no_curp'));
       } else {
-        setResult(response.data);
-        navigate(PATHS.RESULTS);
-
-        if (response.data?.personal_data?.curp) {
-          addCurp(response.data.personal_data.curp);
-        }
-
-        window.parent.postMessage(
-          { event: 'curpValidated', payload: response.data },
-          '*'
-        );
+        handleSuccess(response.data);
       }
     } catch (err) {
-      setError('Hubo un error al consultar el CURP');
+      handleError(t('error_curp'));
     } finally {
       setLoading(false);
     }
@@ -61,22 +49,13 @@ const CurpFormPage = () => {
   }
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+    <FormWrapper onSubmit={onSubmit} loading={loading} error={error}>
       <Input
         name="curp"
         label={t('curp_label')}
-        control={control}
         rules={{ required: t('curp_required') }}
       />
-
-      <CustomButton loading={loading}>{t('validate_button')}</CustomButton>
-
-      {error && (
-        <Alert severity="error" sx={{ mt: 2 }}>
-          {error}
-        </Alert>
-      )}
-    </Box>
+    </FormWrapper>
   );
 };
 

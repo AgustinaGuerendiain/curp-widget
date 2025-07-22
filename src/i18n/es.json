@@ -35,5 +35,15 @@
     "nationality_label": "Nacionalidad",
     "state_label": "Estado de Nacimiento",
     "return_button": "Regresar al Formulario"
+  },
+  "error": {
+    "no_personal_data": "Los datos no coinciden con ningún registro.",
+    "error_personal_data": "Hubo un error al consultar los datos personales.",
+    "error_curp": "Hubo un error al consultar el CURP.",
+    "no_curp": "CURP no encontrado o inválido."
+  },
+  "gender": {
+    "male": "Masculino",
+    "female": "Femenino"
   }
 }

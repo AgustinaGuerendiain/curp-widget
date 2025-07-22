@@ -8,11 +8,10 @@ import {
 import { Controller } from 'react-hook-form';
 import type { DropdownProps } from '../types/form';
 
-const Dropdown = ({ name, label, control, rules, options }: DropdownProps) => {
+const Dropdown = ({ name, label, rules, options }: DropdownProps) => {
   return (
     <Controller
       name={name}
-      control={control}
       rules={rules}
       defaultValue=""
       render={({ field, fieldState: { error } }) => (
@@ -20,7 +19,7 @@ const Dropdown = ({ name, label, control, rules, options }: DropdownProps) => {
           fullWidth
           margin="normal"
           error={!!error}
-          style={{ marginTop: '8px' }}
+          style={{ marginTop: '4px' }}
           size="small"
         >
           <InputLabel>{label}</InputLabel>
@@ -40,7 +39,9 @@ const Dropdown = ({ name, label, control, rules, options }: DropdownProps) => {
               </MenuItem>
             ))}
           </Select>
-          {error && <FormHelperText>{error.message}</FormHelperText>}
+          {/* {error && ( */}
+          <FormHelperText>{error ? error.message : ' '}</FormHelperText>
+          {/* )} */}
         </FormControl>
       )}
     />

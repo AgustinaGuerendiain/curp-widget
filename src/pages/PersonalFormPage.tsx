@@ -1,30 +1,29 @@
-import { Alert, Box, Grid } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Alert, Grid } from '@mui/material';
 import { queryByPersonalData } from '../services/curpService';
-import { MEXICAN_STATES } from '../const';
+import { GENDER_OPTIONS, MEXICAN_STATES } from '../const';
 import { useTranslation } from 'react-i18next';
-import { PATHS } from '../navigation/paths';
-import { useCurpHistory } from '../hooks/useCurpHistory';
-import { CustomButton, Dropdown, Input, InputDate } from '../components';
+import {
+  CustomButton,
+  Dropdown,
+  FormWrapper,
+  Input,
+  InputDate,
+} from '../components';
 import { useApiKeyStore, usePersonalQueryStore } from '../store';
-
-const genderOptions = [
-  { label: 'Masculino', value: 'H' },
-  { label: 'Femenino', value: 'M' },
-];
+import { useFormHook } from '../hooks';
 
 const PersonalFormPage = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm({
-    mode: 'all',
-  });
   const { setLoading, setError, setResult, error, loading } =
     usePersonalQueryStore();
+
   const apiKey = useApiKeyStore((state) => state.apiKey);
-  const { addCurp } = useCurpHistory();
+
+  const { handleSuccess, handleError } = useFormHook({
+    setResult,
+    setError,
+  });
 
   const onSubmit = async (data: any) => {
     if (!apiKey) return;
@@ -47,22 +46,12 @@ const PersonalFormPage = () => {
       );
 
       if (response.errors) {
-        setError('Los datos no coinciden con ningún registro.');
+        handleError(t('no_personal_data'));
       } else {
-        setResult(response.data);
-        navigate(PATHS.RESULTS);
-
-        if (response.data?.personal_data?.curp) {
-          addCurp(response.data.personal_data.curp);
-        }
-
-        window.parent.postMessage(
-          { event: 'curpValidated', payload: response.data },
-          '*'
-        );
+        handleSuccess(response.data);
       }
     } catch (err) {
-      setError('Hubo un error al consultar los datos personales.');
+      handleError(t('error.error_personal_data'));
     } finally {
       setLoading(false);
     }
@@ -77,27 +66,24 @@ const PersonalFormPage = () => {
   }
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <Grid container spacing={2}>
+    <FormWrapper onSubmit={onSubmit} loading={loading} error={error}>
+      <Grid container spacing={{ xs: 0, sm: 2 }}>
         <Grid size={{ xs: 12, sm: 6 }}>
           <Input
             name="name"
             label={t('form.name_label')}
-            control={control}
             rules={{ required: t('form.name_required') }}
           />
 
           <Input
             name="first_surname"
             label={t('form.surname_label')}
-            control={control}
             rules={{ required: t('form.surname_required') }}
           />
 
           <Input
             name="last_surname"
             label={t('form.second_surname_label')}
-            control={control}
             rules={{ required: t('form.second_surname_required') }}
           />
         </Grid>
@@ -105,35 +91,25 @@ const PersonalFormPage = () => {
           <InputDate
             name="birthdate"
             label={t('form.birth_date_label')}
-            control={control}
             rules={{ required: t('form.birth_date_required') }}
           />
 
           <Dropdown
             name="gender"
             label={t('form.gender_label')}
-            control={control}
-            options={genderOptions}
+            options={GENDER_OPTIONS}
             rules={{ required: t('form.gender_required') }}
           />
 
           <Dropdown
             name="state"
             label={t('form.state_label')}
-            control={control}
             options={MEXICAN_STATES}
             rules={{ required: t('form.state_required') }}
           />
         </Grid>
-        <CustomButton loading={loading}>{t('validate_button')}</CustomButton>
       </Grid>
-
-      {error && (
-        <Alert severity="error" sx={{ mt: 2 }}>
-          {error}
-        </Alert>
-      )}
-    </Box>
+    </FormWrapper>
   );
 };
 

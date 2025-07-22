@@ -35,5 +35,15 @@
     "nationality_label": "Nationality",
     "state_label": "State of Birth",
     "return_button": "Return to Form"
+  },
+  "error": {
+    "no_personal_data": "The data does not match any record.",
+    "error_personal_data": "There was an error when consulting the personal data.",
+    "error_curp": "There was an error when consulting the CURP.",
+    "no_curp": "CURP not found or invalid."
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female"
   }
 }

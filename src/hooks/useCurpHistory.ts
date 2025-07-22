@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'curpHistory';
 
-export const useCurpHistory = () => {
+const useCurpHistory = () => {
   const [history, setHistory] = useState<string[]>([]);
 
   useEffect(() => {
@@ -23,3 +23,5 @@ export const useCurpHistory = () => {
 
   return { history, addCurp };
 };
+
+export default useCurpHistory;

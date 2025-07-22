@@ -20,7 +20,7 @@ const Home = () => {
         <Tab label={t('tab2_label')} value={PATHS.PERSONAL} />
       </Tabs>
 
-      <Box mt={1}>
+      <Box mt={2}>
         <Outlet />
       </Box>
     </Container>
