@@ -2,13 +2,7 @@ import { Alert, Grid } from '@mui/material';
 import { queryByPersonalData } from '../services/curpService';
 import { GENDER_OPTIONS, MEXICAN_STATES } from '../const';
 import { useTranslation } from 'react-i18next';
-import {
-  CustomButton,
-  Dropdown,
-  FormWrapper,
-  Input,
-  InputDate,
-} from '../components';
+import { Dropdown, FormWrapper, Input, InputDate } from '../components';
 import { useApiKeyStore, usePersonalQueryStore } from '../store';
 import { useFormHook } from '../hooks';
 
