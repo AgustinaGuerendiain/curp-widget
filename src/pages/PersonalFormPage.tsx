@@ -1,14 +1,13 @@
-import { Box, Typography } from '@mui/material';
+import { Alert, Box, Grid } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { queryByPersonalData } from '../services/curpService';
-import { usePersonalQueryStore } from '../store/usePersonalQueryStore';
-import { useApiKeyStore } from '../store/useApiKeyStore';
 import { MEXICAN_STATES } from '../const';
 import { useTranslation } from 'react-i18next';
 import { PATHS } from '../navigation/paths';
 import { useCurpHistory } from '../hooks/useCurpHistory';
 import { CustomButton, Dropdown, Input, InputDate } from '../components';
+import { useApiKeyStore, usePersonalQueryStore } from '../store';
 
 const genderOptions = [
   { label: 'Masculino', value: 'H' },
@@ -65,64 +64,68 @@ const PersonalFormPage = () => {
 
   if (!apiKey) {
     return (
-      <Typography color="error" mt={4}>
+      <Alert severity="error" sx={{ mt: 4 }}>
         {t('missing_api_key')}
-      </Typography>
+      </Alert>
     );
   }
 
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <Input
-        name="name"
-        label={t('form.name_label')}
-        control={control}
-        rules={{ required: t('form.name_required') }}
-      />
+      <Grid container spacing={2}>
+        <Grid size={{ xs: 12, sm: 6 }}>
+          <Input
+            name="name"
+            label={t('form.name_label')}
+            control={control}
+            rules={{ required: t('form.name_required') }}
+          />
 
-      <Input
-        name="first_surname"
-        label={t('form.surname_label')}
-        control={control}
-        rules={{ required: t('form.surname_required') }}
-      />
+          <Input
+            name="first_surname"
+            label={t('form.surname_label')}
+            control={control}
+            rules={{ required: t('form.surname_required') }}
+          />
 
-      <Input
-        name="last_surname"
-        label={t('form.second_surname_label')}
-        control={control}
-        rules={{ required: t('form.second_surname_required') }}
-      />
+          <Input
+            name="last_surname"
+            label={t('form.second_surname_label')}
+            control={control}
+            rules={{ required: t('form.second_surname_required') }}
+          />
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6 }}>
+          <InputDate
+            name="birthdate"
+            label={t('form.birth_date_label')}
+            control={control}
+            rules={{ required: t('form.birth_date_required') }}
+          />
 
-      <InputDate
-        name="birthdate"
-        label={t('form.birth_date_label')}
-        control={control}
-        rules={{ required: t('form.birth_date_required') }}
-      />
+          <Dropdown
+            name="gender"
+            label={t('form.gender_label')}
+            control={control}
+            options={genderOptions}
+            rules={{ required: t('form.gender_required') }}
+          />
 
-      <Dropdown
-        name="gender"
-        label={t('form.gender_label')}
-        control={control}
-        options={genderOptions}
-        rules={{ required: t('form.gender_required') }}
-      />
-
-      <Dropdown
-        name="state"
-        label={t('form.state_label')}
-        control={control}
-        options={MEXICAN_STATES}
-        rules={{ required: t('form.state_required') }}
-      />
-
-      <CustomButton>{t('validate_button')}</CustomButton>
+          <Dropdown
+            name="state"
+            label={t('form.state_label')}
+            control={control}
+            options={MEXICAN_STATES}
+            rules={{ required: t('form.state_required') }}
+          />
+        </Grid>
+        <CustomButton>{t('validate_button')}</CustomButton>
+      </Grid>
 
       {error && (
-        <Typography color="error" mt={2}>
+        <Alert severity="error" sx={{ mt: 2 }}>
           {error}
-        </Typography>
+        </Alert>
       )}
     </Box>
   );

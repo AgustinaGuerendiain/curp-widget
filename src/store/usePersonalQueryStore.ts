@@ -11,7 +11,7 @@ interface PersonalQueryStore {
   clear: () => void;
 }
 
-export const usePersonalQueryStore = create<PersonalQueryStore>((set) => ({
+const usePersonalQueryStore = create<PersonalQueryStore>((set) => ({
   loading: false,
   error: null,
   result: null,
@@ -20,3 +20,5 @@ export const usePersonalQueryStore = create<PersonalQueryStore>((set) => ({
   setResult: (result) => set({ result }),
   clear: () => set({ loading: false, error: null, result: null }),
 }));
+
+export default usePersonalQueryStore;

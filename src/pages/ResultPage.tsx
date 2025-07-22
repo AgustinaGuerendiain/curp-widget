@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
-import { useCurpQueryStore } from '../store/useCurpQueryStore';
-import { usePersonalQueryStore } from '../store/usePersonalQueryStore';
 import { PATHS } from '../navigation/paths';
 import ResultBox from '../components/ResultBox';
 import { useTranslation } from 'react-i18next';
+import { useCurpQueryStore, usePersonalQueryStore } from '../store';
 
 const ResultPage = () => {
   const navigate = useNavigate();

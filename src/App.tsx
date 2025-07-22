@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation, useRoutes } from 'react-router-dom';
 import { routes } from './navigation/routes';
-import { useApiKeyStore } from './store/useApiKeyStore';
 import i18n from './i18n';
+import { useApiKeyStore } from './store';
 
 function App() {
   const location = useLocation();

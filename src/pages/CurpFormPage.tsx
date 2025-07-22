@@ -1,14 +1,12 @@
-import { Box, Typography } from '@mui/material';
+import { Alert, Box } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import Input from '../components/Input';
-import CustomButton from '../components/Button';
 import { queryByCurp } from '../services/curpService';
-import { useCurpQueryStore } from '../store/useCurpQueryStore';
-import { useApiKeyStore } from '../store/useApiKeyStore';
 import { useTranslation } from 'react-i18next';
 import { PATHS } from '../navigation/paths';
 import { useCurpHistory } from '../hooks/useCurpHistory';
+import { CustomButton, Input } from '../components';
+import { useApiKeyStore, useCurpQueryStore } from '../store';
 
 const CurpFormPage = () => {
   const { t } = useTranslation();
@@ -50,9 +48,9 @@ const CurpFormPage = () => {
 
   if (!apiKey) {
     return (
-      <Typography color="error" mt={4}>
+      <Alert severity="error" sx={{ mt: 4 }}>
         {t('missing_api_key')}
-      </Typography>
+      </Alert>
     );
   }
 
@@ -68,9 +66,9 @@ const CurpFormPage = () => {
       <CustomButton>{t('validate_button')}</CustomButton>
 
       {error && (
-        <Typography color="error" mt={2}>
+        <Alert severity="error" sx={{ mt: 2 }}>
           {error}
-        </Typography>
+        </Alert>
       )}
     </Box>
   );

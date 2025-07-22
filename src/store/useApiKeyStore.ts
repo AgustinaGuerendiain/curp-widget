@@ -5,7 +5,9 @@ interface UseApiKeyStore {
   setApiKey: (key: string) => void;
 }
 
-export const useApiKeyStore = create<UseApiKeyStore>((set) => ({
+const useApiKeyStore = create<UseApiKeyStore>((set) => ({
   apiKey: null,
   setApiKey: (key) => set({ apiKey: key }),
 }));
+
+export default useApiKeyStore;

@@ -11,7 +11,7 @@ interface CurpQueryStore {
   clear: () => void;
 }
 
-export const useCurpQueryStore = create<CurpQueryStore>((set) => ({
+const useCurpQueryStore = create<CurpQueryStore>((set) => ({
   loading: false,
   error: null,
   result: null,
@@ -20,3 +20,5 @@ export const useCurpQueryStore = create<CurpQueryStore>((set) => ({
   setResult: (result) => set({ result }),
   clear: () => set({ loading: false, error: null, result: null }),
 }));
+
+export default useCurpQueryStore;
