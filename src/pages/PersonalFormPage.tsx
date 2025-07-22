@@ -1,6 +1,6 @@
 import { Alert, Grid } from '@mui/material';
 import { queryByPersonalData } from '../services/curpService';
-import { GENDER_OPTIONS, MEXICAN_STATES } from '../const';
+import { MEXICAN_STATES } from '../const';
 import { useTranslation } from 'react-i18next';
 import { Dropdown, FormWrapper, Input, InputDate } from '../components';
 import { useApiKeyStore, usePersonalQueryStore } from '../store';
@@ -8,6 +8,11 @@ import { useFormHook } from '../hooks';
 
 const PersonalFormPage = () => {
   const { t } = useTranslation();
+
+  const GENDER_OPTIONS = [
+    { label: t('gender.male'), value: 'H' },
+    { label: t('gender.female'), value: 'M' },
+  ];
 
   const { setLoading, setError, setResult, error, loading } =
     usePersonalQueryStore();

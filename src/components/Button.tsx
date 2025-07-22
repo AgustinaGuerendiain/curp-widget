@@ -1,9 +1,12 @@
 import { Button } from '@mui/material';
 import type { CustomButtonProps } from '../types/form';
 
-const CustomButton = ({ children, fullWidth = true }: CustomButtonProps) => {
+const CustomButton = (props: CustomButtonProps) => {
+  const { children, fullWidth = true, ...rest } = props;
+
   return (
     <Button
+      {...rest}
       variant="contained"
       color="primary"
       type="submit"
